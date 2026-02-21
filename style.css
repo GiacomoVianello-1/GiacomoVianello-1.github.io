@@ -1,0 +1,41 @@
+---
+---
+
+a {
+  color: #4051b5;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #f09228;
+  text-decoration: none;
+}
+
+body, td, th, tr, p, a, strong {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+h1 {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 40px;
+  font-weight: normal;
+  text-align: center;
+  margin-block-start: 14px;
+  margin-block-end: 14px;
+}
+
+h2 {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  display:inline; 
+}
+
+h3 {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  display:inline; 
+}

@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Deep Reinforcement Learning for Snake"
+authors: Giacomo Vianello
+categories: Research
+image: /images/rl_snake.png
+code: https://github.com/GiacomoVianello-1/RL-Snake
+paper: /pdfs/DRL_Snake_Project.pdf
+venue: Course Project - Reinforcement Learning
+abstract: "An implementation of various Deep Reinforcement Learning agents (A2C, PPO, and DDQN) to solve the classic Snake game. The project explores agent performance in both fully and partially observable environments, analyzing how different architectures and reward functions impact the learning stability and final score."
+---
+In this project, I developed a custom environment for the Snake game to test different **Deep Reinforcement Learning** algorithms. I compared policy-gradient methods like **PPO** and **A2C** against value-based methods like **Double DQN**. A significant part of the work involved designing the state representation for partially observable scenarios, where the agent only sees a limited 3x3 or 5x5 grid around its head.

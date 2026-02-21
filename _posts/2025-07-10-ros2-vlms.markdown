@@ -1,0 +1,14 @@
+---
+layout: post
+title: "ROS2 Integration of Vision-Language Models"
+authors: Giacomo Vianello
+categories: Research
+image: /images/ros2_vlm.png
+code: https://github.com/GiacomoVianello-1/ros2_vlms/tree/ros2-vlms-updated
+venue: Research Internship - University of Zaragoza
+abstract: "Development of a ROS2 framework to integrate Vision-Language Models (VLMs) for aerial robotics. The project enables real-time scene understanding and captioning using both local models (like BLIP and SmolVLM) and cloud-based APIs (Gemini), providing a modular pipeline for high-level robot perception."
+---
+
+Prior to my internship at the **University of Zaragoza**, I developed this ROS2-based infrastructure to bridge the gap between high-level semantic reasoning and robotic platforms. The system is organized into two main packages: `vlm_api_package`, which interfaces with the **Gemini API** for powerful cloud-based reasoning, and `vlm_local_package`, which implements local inference using **SmolVLM** and **BLIP** for privacy and edge computing scenarios. 
+
+The framework allows a drone to publish its camera stream and receive semantic descriptions of the environment, which can then be used for complex tasks like autonomous path planning and human-robot interaction.
