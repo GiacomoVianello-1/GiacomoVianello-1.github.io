@@ -5,7 +5,7 @@ authors: Giacomo Vianello
 categories: Research
 image: /images/ros2_vlm.png
 code: https://github.com/GiacomoVianello-1/ros2_vlms/tree/ros2-vlms-updated
-venue: Research Internship - University of Zaragoza
+venue: Free-time Project
 abstract: "Development of a ROS2 framework to integrate Vision-Language Models (VLMs) for aerial robotics. The project enables real-time scene understanding and captioning using both local models (like BLIP and SmolVLM) and cloud-based APIs (Gemini), providing a modular pipeline for high-level robot perception."
 ---
 

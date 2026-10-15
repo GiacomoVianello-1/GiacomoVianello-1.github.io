@@ -2,7 +2,7 @@
 layout: post
 title: "NMPC for Inverted Pendulum on a Cart using Acados"
 author: "Giacomo Vianello"
-authors: 
+authors: Giacomo Vianello
 categories: Research
 image: /images/pendulum.gif
 code: https://github.com/GiacomoVianello-1/NMPC-Inverted-Pendulum-Acados
