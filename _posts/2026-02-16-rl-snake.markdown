@@ -3,7 +3,7 @@ layout: post
 title: "Deep Reinforcement Learning for Snake"
 authors: Giacomo Vianello
 categories: Research
-image: /images/rl_snake.png
+image: /images/rl_snake.gif
 code: https://github.com/GiacomoVianello-1/RL-Snake
 paper: /pdfs/DRL_Snake_Project.pdf
 venue: Course Project - Reinforcement Learning
