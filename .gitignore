@@ -28,3 +28,9 @@ ehthumbs.db
 
 # Others
 docker.md
+.sass-cache
+Gemfile
+Gemfile.lock
+node_modules
+package.json
+favicon.ico
