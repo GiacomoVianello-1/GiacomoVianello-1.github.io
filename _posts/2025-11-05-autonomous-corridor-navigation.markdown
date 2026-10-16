@@ -4,7 +4,7 @@ title: "Autonomous Navigation and Semantic Goal Seeking"
 author: Giacomo Vianello
 authors: <strong>G Vianello</strong>, S Ferracane
 categories: Research
-image: /images/nav_robot.png
+image: /images/nav.gif
 code: https://github.com/GiacomoVianello-1/IR_assignment_1_07
 paper: /pdfs/07_assignment1.pdf
 venue: Intelligent Robotics - University of Padua
