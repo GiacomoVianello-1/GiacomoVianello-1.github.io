@@ -21,6 +21,46 @@
         element.style.display = "none";
       }
     }
+
+    function openImageModal(src, alt) {
+      var modal = document.getElementById('image-modal');
+      var img = document.getElementById('modal-img-target');
+      if (modal && img) {
+        img.onerror = function() {
+          if (!this.src.includes('/tn/')) {
+            this.src = '/tn' + src;
+          }
+        };
+        img.src = src;
+        img.alt = alt || 'Preview';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function openProfileModal() {
+      openImageModal('images/profile.jpg', 'Giacomo Vianello');
+    }
+
+    function closeImageModal(e) {
+      if (!e || e.target.id === 'image-modal' || e.target.closest('.modal-close')) {
+        var modal = document.getElementById('image-modal');
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+    }
+
+    function closeProfileModal(e) {
+      closeImageModal(e);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeImageModal();
+      }
+    });
   </script>
 
   <title>{{ site.name }}</title>
@@ -39,7 +79,10 @@
 </head>
 
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  <!-- Interactive Spatial Neural Mesh Canvas -->
+  <canvas id="spatial-canvas"></canvas>
+
+  <table class="content-card" style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;">
     <tr style="padding:0px">
       <td style="padding:0px">
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
@@ -62,18 +105,42 @@
                 </p>
             </td>
             <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/profile.png"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/profile.png" class="hoverZoomLink"></a>
+              <a href="javascript:void(0)" onclick="openProfileModal()"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%; cursor: pointer;" alt="profile photo" src="images/profile.jpg" class="hoverZoomLink"></a>
             </td>
           </tr>
         </table>
-        <p style="text-align:center">
-                <a target="_blank" href="mailto:giacomo.vianello.2@phd.unipd.it"> Email</a> &nbsp;|&nbsp;
-                <a href="https://scholar.google.com/citations?hl=it&authuser=1&user=_TxAk-sAAAAJ">Google Scholar</a> &nbsp;|&nbsp;
-                <a href="pdfs/Giacomo_Vianello_CV.pdf">CV</a> &nbsp;|&nbsp;
-                <!--<a href="pdfs/Giacomo_Vianello_Resume.pdf">Resume</a> &nbsp;|&nbsp;-->
-                <a href="https://www.linkedin.com/in/giacomo-vianello/"> LinkedIn </a> &nbsp;|&nbsp;
-                <a href="https://github.com/GiacomoVianello-1"> GitHub </a>
-        </p>
+        <div class="social-icons-bar">
+          <a class="social-item" target="_blank" href="mailto:giacomo.vianello.2@phd.unipd.it" title="Email" aria-label="Email">
+            <div class="social-icon-btn">
+              {% include icons/email.svg %}
+            </div>
+            <span class="social-label">Email</span>
+          </a>
+          <a class="social-item" target="_blank" href="https://scholar.google.com/citations?hl=it&authuser=1&user=_TxAk-sAAAAJ" title="Google Scholar" aria-label="Google Scholar">
+            <div class="social-icon-btn">
+              {% include icons/scholar.svg %}
+            </div>
+            <span class="social-label">Scholar</span>
+          </a>
+          <a class="social-item" target="_blank" href="pdfs/Giacomo_Vianello_CV.pdf" title="Curriculum Vitae" aria-label="Curriculum Vitae">
+            <div class="social-icon-btn">
+              {% include icons/cv.svg %}
+            </div>
+            <span class="social-label">CV</span>
+          </a>
+          <a class="social-item" target="_blank" href="https://www.linkedin.com/in/giacomo-vianello/" title="LinkedIn" aria-label="LinkedIn">
+            <div class="social-icon-btn">
+              {% include icons/linkedin.svg %}
+            </div>
+            <span class="social-label">LinkedIn</span>
+          </a>
+          <a class="social-item" target="_blank" href="https://github.com/GiacomoVianello-1" title="GitHub" aria-label="GitHub">
+            <div class="social-icon-btn">
+              {% include icons/github.svg %}
+            </div>
+            <span class="social-label">GitHub</span>
+          </a>
+        </div>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:2.5%;width:100%;vertical-align:middle">
@@ -110,7 +177,9 @@
           {% if cat == 'Research' %}
           <tr>
             <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
-              <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
+              <a href="javascript:void(0)" onclick="openImageModal('{{post.image}}', '{{post.title | escape}}')">
+                <img src="/tn{{post.image}}" alt="{{post.title | escape}}" style="width:auto; height:auto; max-width:100%; cursor: pointer;" class="hoverZoomLink" />
+              </a>
             </td>
             <td style="padding:2.5%;width:75%;vertical-align:middle">
               <h3>{{post.title}}</h3>
@@ -321,6 +390,16 @@
       </td>
     </tr>
   </table>
+
+  <!-- Generic Image Lightbox Modal -->
+  <div id="image-modal" class="modal-overlay" onclick="closeImageModal(event)">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeImageModal(event)" aria-label="Close">&times;</button>
+      <img id="modal-img-target" src="images/profile.jpg" alt="Preview" class="modal-image">
+    </div>
+  </div>
+
+  <script src="{{ site.baseurl }}/js/spatial-mesh.js"></script>
 </body>
 
 </html>
