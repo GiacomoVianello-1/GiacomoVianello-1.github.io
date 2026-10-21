@@ -3,7 +3,7 @@ layout: post
 title: "ROS2 Integration of Vision-Language Models"
 authors: Giacomo Vianello
 categories: Research
-image: /images/ros2_vlm.png
+image: /images/ros2_vlm.jpg
 code: https://github.com/GiacomoVianello-1/ros2_vlms/tree/ros2-vlms-updated
 venue: Free-time Project
 abstract: "Development of a ROS2 framework to integrate Vision-Language Models (VLMs) for aerial robotics. The project enables real-time scene understanding and captioning using both local models (like BLIP and SmolVLM) and cloud-based APIs (Gemini), providing a modular pipeline for high-level robot perception."

@@ -7,7 +7,7 @@
 
 (function() {
   // ==========================================================================
-  // DRONE CONFIGURATION DEL DRONE
+  // DRONE CONFIGURATION
   // ==========================================================================
   const DRONE_CONFIG = {
     size: 100, // Drone's dimension in pixels (width and height)
@@ -19,18 +19,18 @@
     flightDurationMs: 10000,  // Time to travel the screen
 
     // Max Opacity of the drone
-    maxOpacityLight: 0.52,    // Light mode
-    maxOpacityDark: 0.62,     // Dark mode
+    maxOpacityLight: 0.72,    // Light mode
+    maxOpacityDark: 0.82,     // Dark mode
 
     // Trajectory mode:
-    // 'diagonal'   -> attraversa in diagonale (dal basso verso l'alto)
-    // 'horizontal' -> attraversa in orizzontale
-    // 'vertical'   -> attraversa dritto dal basso verso l'alto
-    // 'random'     -> sceglie casualmente una traiettoria diversa ad ogni volo
+    // 'diagonal'   -> crosses in diagonal (top to bottom)
+    // 'horizontal' -> crosses in horizontal (left to right)
+    // 'vertical'   -> crosses in vertical (top to bottom)
+    // 'random'     -> chooses a different trajectory at random for each flight
     trajectory: 'random',
   };
 
-  // Stato condiviso con il canvas (spatial-mesh.js) per l'effetto downwash sui nodi
+  // Shared state with canvas (spatial-mesh.js) for rotor downwash effect on nodes
   window.droneState = {
     active: false,
     x: -200,
@@ -40,7 +40,7 @@
   const droneEl = document.getElementById('drone-container');
   if (!droneEl) return;
 
-  // Applica le dimensioni configurate
+  // Apply configured dimensions
   droneEl.style.width = DRONE_CONFIG.size + 'px';
   droneEl.style.height = DRONE_CONFIG.size + 'px';
   const halfSize = DRONE_CONFIG.size / 2;
@@ -70,14 +70,14 @@
       const fromLeft = Math.random() > 0.35;
       if (fromLeft) {
         startX = -offset;
-        startY = h * (0.65 + Math.random() * 0.35); // parte dal basso a sinistra
+        startY = h * (0.65 + Math.random() * 0.35); // starts from bottom left
         targetX = w + offset;
-        targetY = h * (Math.random() * 0.35);        // esce in alto a destra
+        targetY = h * (Math.random() * 0.35);        // exits at top right
       } else {
         startX = w + offset;
-        startY = h * (0.65 + Math.random() * 0.35); // parte dal basso a destra
+        startY = h * (0.65 + Math.random() * 0.35); // starts from bottom right
         targetX = -offset;
-        targetY = h * (Math.random() * 0.35);        // esce in alto a sinistra
+        targetY = h * (Math.random() * 0.35);        // exits at top left
       }
     } else if (mode === 'vertical') {
       startX = Math.random() * (w * 0.6) + w * 0.2;
@@ -154,7 +154,7 @@
     window.droneState.x = currentX;
     window.droneState.y = currentY;
 
-    // Calcolo angolo orientamento muso (+90 perché l'icona punta in alto)
+    // Calculate heading angle (+90deg because drone SVG icon points upwards)
     const dx = drone.targetX - drone.startX;
     const dy = (drone.targetY - drone.startY) + Math.cos(progress * Math.PI * drone.waveFreq) * drone.waveAmp * 3.5;
     const headingDeg = Math.atan2(dy, dx) * 180 / Math.PI + 90;
@@ -165,7 +165,7 @@
     requestAnimationFrame(droneLoop);
   }
 
-  // Primo volo
+  // Schedule first flight
   scheduleNextFlight(DRONE_CONFIG.firstFlightDelayMs);
 })();
 

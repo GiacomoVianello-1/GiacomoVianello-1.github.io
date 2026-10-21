@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <!-- Anti-flicker Theme Script -->
+  <!-- Anti-flicker Theme Script: kept inline in <head> to prevent Flash of Unstyled Content (FOUC) -->
   <script type="text/javascript">
     (function() {
       var savedTheme = localStorage.getItem('theme');
@@ -13,83 +13,7 @@
     })();
   </script>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-E00L9PT3V9"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-E00L9PT3V9');
-  </script>
-
-  <script type="text/javascript">
-    function toggleBlock(id) {
-      var element = document.getElementById(id);
-      if (element.style.display === "none") {
-        element.style.display = "block";
-      } else {
-        element.style.display = "none";
-      }
-    }
-
-    function openImageModal(src, alt) {
-      var modal = document.getElementById('image-modal');
-      var img = document.getElementById('modal-img-target');
-      if (modal && img) {
-        img.onerror = function() {
-          if (!this.src.includes('/tn/')) {
-            this.src = '/tn' + src;
-          }
-        };
-        img.src = src;
-        img.alt = alt || 'Preview';
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    }
-
-    function openProfileModal() {
-      openImageModal('images/profile.jpg', 'Giacomo Vianello');
-    }
-
-    function closeImageModal(e) {
-      if (!e || e.target.id === 'image-modal' || e.target.closest('.modal-close')) {
-        var modal = document.getElementById('image-modal');
-        if (modal) {
-          modal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-      }
-    }
-
-    function closeProfileModal(e) {
-      closeImageModal(e);
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeImageModal();
-      }
-    });
-
-    function toggleTheme() {
-      var isDark = document.documentElement.classList.toggle('dark-mode');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    }
-
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-        if (!localStorage.getItem('theme')) {
-          if (e.matches) {
-            document.documentElement.classList.add('dark-mode');
-          } else {
-            document.documentElement.classList.remove('dark-mode');
-          }
-        }
-      });
-    }
-  </script>
+  {% include analytics.html %}
 
   <title>{{ site.name }}</title>
 
@@ -102,6 +26,7 @@
 
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/drone.css" />
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/robot.css" />
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
@@ -120,6 +45,11 @@
   <!-- Stylized Background Autonomous Drone -->
   <div id="drone-container" class="drone-container" aria-hidden="true">
     {% include icons/drone.svg %}
+  </div>
+
+  <!-- Stylized Background Autonomous Ground Robot (TurtleBot) -->
+  <div id="robot-container" class="robot-container" aria-hidden="true">
+    {% include icons/robot.svg %}
   </div>
 
   <table class="content-card" style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;">
@@ -186,15 +116,57 @@
             <td style="padding:2.5%;width:100%;vertical-align:middle">
                 <h2 style="color:var(--heading-secondary)">News</h2>
                 <div class="news-container">
-                    <ul class="list">
-                    <li><em>[Nov 2026]</em> I started my PhD in <strong>Information Engineering</strong> at the <a href="https://www.unipd.it/">University of Padua</a>!</li>
-                    <li><em>[Oct 2026]</em> I wrote my first research paper on the application of VLMs in autonomous robotics and submitted to a conference.</li>
-                    <li><em>[Sep 2026]</em> I defended my Master's thesis in <strong>Control Systems Engineering</strong> and graduated with <strong>honors</strong>.</li>
-                    <li><em>[Jul 2026]</em> The source code for my Master's project is now available on <a href="https://github.com/GiacomoVianello-1/vlm_onboad_drones">GitHub</a>!</li>
-                    <li><em>[Feb 2026]</em> I joined the <strong>RoPeRT</strong> group at the <a href="https://www.unizar.es/">University of Zaragoza</a> as a Research Intern. My work focuses on integrating <strong>Vision-Language Models (VLMs)</strong> into small unmanned aerial vehicles for autonomous task execution driven by natural language instructions.</li>
-                    <li><em>[Sep 2024]</em> I began my Master’s Degree in <strong>Control Systems Engineering</strong> at the <a href="https://www.unipd.it/">University of Padua</a>, Italy.</li>
-                    <li><em>[Jul 2024]</em> I graduated in <strong>Electronic Engineering</strong> from the <a href="https://www.unipd.it/">University of Padua</a> with a final grade of <strong>110/110</strong>.</li>
-                    </ul>
+                  <ul class="news-timeline">
+                    <li class="news-item latest">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Nov 2026</span>
+                        <span class="news-text">I started my PhD in <strong>Information Engineering</strong> at the <a href="https://www.unipd.it/">University of Padua</a>!</span>
+                      </div>
+                    </li>
+                    <li class="news-item">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Oct 2026</span>
+                        <span class="news-text">I wrote my first research paper on the application of VLMs in autonomous robotics and submitted to a conference.</span>
+                      </div>
+                    </li>
+                    <li class="news-item">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Sep 2026</span>
+                        <span class="news-text">I defended my Master's thesis in <strong>Control Systems Engineering</strong> and graduated with <strong>honors</strong>.</span>
+                      </div>
+                    </li>
+                    <li class="news-item">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Jul 2026</span>
+                        <span class="news-text">The source code for my Master's project is now available on <a href="https://github.com/GiacomoVianello-1/vlm_onboad_drones">GitHub</a>!</span>
+                      </div>
+                    </li>
+                    <li class="news-item">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Feb 2026</span>
+                        <span class="news-text">I joined the <strong>RoPeRT</strong> group at the <a href="https://www.unizar.es/">University of Zaragoza</a> as a Research Intern. My work focuses on integrating <strong>Vision-Language Models (VLMs)</strong> into small unmanned aerial vehicles for autonomous task execution driven by natural language instructions.</span>
+                      </div>
+                    </li>
+                    <li class="news-item">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Sep 2024</span>
+                        <span class="news-text">I began my Master’s Degree in <strong>Control Systems Engineering</strong> at the <a href="https://www.unipd.it/">University of Padua</a>, Italy.</span>
+                      </div>
+                    </li>
+                    <li class="news-item">
+                      <div class="news-marker"></div>
+                      <div class="news-body">
+                        <span class="news-date">Jul 2024</span>
+                        <span class="news-text">I graduated in <strong>Electronic Engineering</strong> from the <a href="https://www.unipd.it/">University of Padua</a> with a final grade of <strong>110/110</strong>.</span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
             </td>
           </tr>
@@ -439,8 +411,10 @@
     </div>
   </div>
 
+  <script src="{{ site.baseurl }}/js/main.js"></script>
   <script src="{{ site.baseurl }}/js/spatial-mesh.js"></script>
   <script src="{{ site.baseurl }}/js/drone.js"></script>
+  <script src="{{ site.baseurl }}/js/robot.js"></script>
 </body>
 
 </html>

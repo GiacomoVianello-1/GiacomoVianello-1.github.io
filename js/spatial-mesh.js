@@ -86,6 +86,21 @@
           this.y -= Math.sin(angle) * force * 3.2;
         }
       }
+
+      // Ground robot obstacle avoidance / proximity interaction (from js/robot.js)
+      if (window.robotState && window.robotState.active) {
+        const rdx = window.robotState.x - this.x;
+        const rdy = window.robotState.y - this.y;
+        const rDist = Math.hypot(rdx, rdy);
+        const robotRadius = 75;
+
+        if (rDist < robotRadius && rDist > 0.01) {
+          const force = (robotRadius - rDist) / robotRadius;
+          const angle = Math.atan2(rdy, rdx);
+          this.x -= Math.cos(angle) * force * 2.8;
+          this.y -= Math.sin(angle) * force * 2.8;
+        }
+      }
     }
 
     draw(isDark) {

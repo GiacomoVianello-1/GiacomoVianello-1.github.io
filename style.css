@@ -117,7 +117,7 @@ h3 {
   color: var(--heading-secondary) !important;
 }
 
-/* Canvas interattivo Spatial Neural Mesh */
+/* Interactive Spatial Neural Mesh Canvas */
 #spatial-canvas {
   position: fixed;
   top: 0;
@@ -130,7 +130,7 @@ h3 {
   transition: background 0.4s ease;
 }
 
-/* Card centrale dei contenuti con effetto frosted glass */
+/* Central content card with frosted glass effect */
 .content-card {
   position: relative;
   z-index: 1;
@@ -145,7 +145,7 @@ h3 {
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Pulsante Toggle Modalità Chiara / Scura */
+/* Dark/Light Mode Theme Toggle Button */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -225,20 +225,25 @@ h3 {
   }
 }
 
-/* News Container con Scrollbar stilizzata */
+/* ==========================================================================
+   News Timeline Stream
+   ========================================================================== */
+
 .news-container {
-  height: 150px;
-  padding: 0;
+  height: 200px;
+  max-height: 220px;
   width: 100%;
   border: 0;
   overflow-y: auto;
-  vertical-align: middle;
+  position: relative;
+  padding: 6px 12px 6px 2px;
+  box-sizing: border-box;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 .news-container::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .news-container::-webkit-scrollbar-track {
@@ -248,6 +253,193 @@ h3 {
 .news-container::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
   border-radius: 4px;
+}
+
+.news-container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--heading-primary);
+}
+
+/* Timeline vertical guide track */
+.news-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.news-timeline::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 14px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    var(--heading-secondary) 0%,
+    var(--heading-primary) 35%,
+    rgba(64, 81, 181, 0.15) 100%
+  );
+  border-radius: 1px;
+}
+
+.dark-mode .news-timeline::before {
+  background: linear-gradient(
+    to bottom,
+    var(--heading-secondary) 0%,
+    var(--heading-primary) 35%,
+    rgba(129, 140, 248, 0.2) 100%
+  );
+}
+
+/* News row item */
+.news-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 10px 8px 32px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  transition: background-color 0.25s ease;
+}
+
+.news-item:last-child {
+  margin-bottom: 0;
+}
+
+.news-item:hover {
+  background-color: rgba(64, 81, 181, 0.05);
+}
+
+.dark-mode .news-item:hover {
+  background-color: rgba(129, 140, 248, 0.08);
+}
+
+/* Node marker accurately centered on the timeline track */
+.news-marker {
+  box-sizing: border-box;
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  width: 12px;
+  height: 12px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 2px solid var(--heading-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-item:hover .news-marker {
+  transform: translateX(-50%) scale(1.25);
+  border-color: var(--heading-secondary);
+  box-shadow: 0 0 8px var(--heading-secondary);
+}
+
+/* Active / Latest milestone marker */
+.news-item.latest .news-marker {
+  border-color: var(--heading-secondary);
+  background: var(--heading-secondary);
+  box-shadow: 0 0 10px rgba(240, 146, 40, 0.65);
+}
+
+.news-item.latest .news-marker::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* Content body holding date pill and descriptive text */
+.news-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.news-item:hover .news-body {
+  transform: translateX(4px);
+}
+
+@media (min-width: 580px) {
+  .news-body {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+  }
+}
+
+/* Date Badge / Pill */
+.news-date {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  color: var(--heading-primary);
+  background: rgba(64, 81, 181, 0.08);
+  border: 1px solid rgba(64, 81, 181, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  display: inline-block;
+  align-self: flex-start;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.news-item.latest .news-date {
+  color: var(--heading-secondary);
+  background: rgba(240, 146, 40, 0.12);
+  border-color: rgba(240, 146, 40, 0.32);
+}
+
+.dark-mode .news-date {
+  color: var(--heading-primary);
+  background: rgba(129, 140, 248, 0.12);
+  border-color: rgba(129, 140, 248, 0.25);
+}
+
+.dark-mode .news-item.latest .news-date {
+  color: var(--heading-secondary);
+  background: rgba(251, 146, 60, 0.15);
+  border-color: rgba(251, 146, 60, 0.35);
+}
+
+/* News narrative text */
+.news-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.news-text strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.news-text a {
+  font-weight: 600;
+  color: var(--link-color);
+  text-decoration: underline;
+  text-decoration-color: rgba(64, 81, 181, 0.3);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+
+.news-text a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
 }
 
 /* Abstract & BibTeX Section Boxes */
