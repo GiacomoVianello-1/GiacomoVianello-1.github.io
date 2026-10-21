@@ -1,0 +1,55 @@
+<svg class="drone-graphic" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="drone-fov-gradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="var(--heading-secondary, #f09228)" stop-opacity="0.32" />
+      <stop offset="100%" stop-color="var(--heading-secondary, #f09228)" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Front Vision / VLM Perception Cone -->
+  <polygon points="50,34 12,0 88,0" fill="url(#drone-fov-gradient)" />
+
+  <!-- Diagonal Carbon Fiber Arms -->
+  <line x1="26" y1="26" x2="74" y2="74" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+  <line x1="74" y1="26" x2="26" y2="74" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Rotor Discs & Spinning Propellers -->
+  <!-- Front Left -->
+  <g class="drone-rotor" style="transform-origin: 26px 26px;">
+    <circle cx="26" cy="26" r="16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3, 3" opacity="0.55" />
+    <line x1="13" y1="26" x2="39" y2="26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+    <circle cx="26" cy="26" r="3.5" fill="currentColor" />
+  </g>
+
+  <!-- Front Right -->
+  <g class="drone-rotor" style="transform-origin: 74px 26px;">
+    <circle cx="74" cy="26" r="16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3, 3" opacity="0.55" />
+    <line x1="61" y1="26" x2="87" y2="26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+    <circle cx="74" cy="26" r="3.5" fill="currentColor" />
+  </g>
+
+  <!-- Rear Left -->
+  <g class="drone-rotor" style="transform-origin: 26px 74px;">
+    <circle cx="26" cy="74" r="16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3, 3" opacity="0.55" />
+    <line x1="13" y1="74" x2="39" y2="74" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+    <circle cx="26" cy="74" r="3.5" fill="currentColor" />
+  </g>
+
+  <!-- Rear Right -->
+  <g class="drone-rotor" style="transform-origin: 74px 74px;">
+    <circle cx="74" cy="74" r="16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="3, 3" opacity="0.55" />
+    <line x1="61" y1="74" x2="87" y2="74" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+    <circle cx="74" cy="74" r="3.5" fill="currentColor" />
+  </g>
+
+  <!-- Main Fuselage Body -->
+  <rect x="42" y="38" width="16" height="26" rx="4" fill="currentColor" />
+
+  <!-- Front Camera / Sensor Gimbal -->
+  <path d="M45,38 L55,38 L53,32 L47,32 Z" fill="var(--heading-secondary, #f09228)" />
+  <circle cx="50" cy="34" r="1.6" fill="#ffffff" />
+
+  <!-- Center Status LED Beacon -->
+  <circle cx="50" cy="51" r="2.2" fill="var(--heading-secondary, #f09228)" class="drone-beacon" />
+</svg>
+

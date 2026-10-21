@@ -7,11 +7,18 @@
   let particles = [];
   let mouse = { x: null, y: null, radius: 140 };
 
-  // Palette: University of Padua Indigo (#4051b5) and warm amber (#f09228)
-  const colors = [
+  // Light Palette: University of Padua Indigo (#4051b5), Soft indigo (#5c6bc0), Amber (#f09228)
+  const colorsLight = [
     'rgba(64, 81, 181, ',  // Indigo
     'rgba(92, 107, 192, ', // Soft indigo
     'rgba(240, 146, 40, ', // Amber
+  ];
+
+  // Dark Palette: Bright Indigo (#818cf8), Soft Lavender (#a5b4fc), Warm Amber (#fb923c)
+  const colorsDark = [
+    'rgba(129, 140, 248, ', // Electric Indigo
+    'rgba(165, 180, 252, ', // Soft Lavender
+    'rgba(251, 146, 60, ',  // Amber
   ];
 
   function resize() {
@@ -34,7 +41,7 @@
       this.radius = this.baseRadius;
       this.vx = (Math.random() - 0.5) * 0.45;
       this.vy = (Math.random() - 0.5) * 0.45;
-      this.colorPrefix = colors[Math.floor(Math.random() * colors.length)];
+      this.colorIndex = Math.floor(Math.random() * 3);
       this.alpha = Math.random() * 0.35 + 0.35;
     }
 
@@ -64,12 +71,28 @@
           this.radius = this.baseRadius;
         }
       }
+
+      // Drone rotor downwash interaction (from js/drone.js)
+      if (window.droneState && window.droneState.active) {
+        const ddx = window.droneState.x - this.x;
+        const ddy = window.droneState.y - this.y;
+        const dDist = Math.hypot(ddx, ddy);
+        const downwashRadius = 80;
+
+        if (dDist < downwashRadius && dDist > 0.01) {
+          const force = (downwashRadius - dDist) / downwashRadius;
+          const angle = Math.atan2(ddy, ddx);
+          this.x -= Math.cos(angle) * force * 3.2;
+          this.y -= Math.sin(angle) * force * 3.2;
+        }
+      }
     }
 
-    draw() {
+    draw(isDark) {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.colorPrefix + this.alpha + ')';
+      const prefix = isDark ? colorsDark[this.colorIndex] : colorsLight[this.colorIndex];
+      ctx.fillStyle = prefix + this.alpha + ')';
       ctx.fill();
     }
   }
@@ -82,9 +105,10 @@
     }
   }
 
-  function drawConnections() {
+  function drawConnections(isDark) {
     const maxDist = 130;
     const pLen = particles.length;
+    const strokeBase = isDark ? 'rgba(129, 140, 248, ' : 'rgba(64, 81, 181, ';
 
     for (let i = 0; i < pLen; i++) {
       const p1 = particles[i];
@@ -93,11 +117,11 @@
       if (mouse.x !== null && mouse.y !== null) {
         const mDist = Math.hypot(mouse.x - p1.x, mouse.y - p1.y);
         if (mDist < mouse.radius) {
-          const lineAlpha = (1 - mDist / mouse.radius) * 0.45;
+          const lineAlpha = (1 - mDist / mouse.radius) * (isDark ? 0.55 : 0.45);
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = 'rgba(64, 81, 181, ' + lineAlpha + ')';
+          ctx.strokeStyle = strokeBase + lineAlpha + ')';
           ctx.lineWidth = 0.8;
           ctx.stroke();
         }
@@ -109,11 +133,11 @@
         const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
 
         if (dist < maxDist) {
-          const lineAlpha = (1 - dist / maxDist) * 0.22;
+          const lineAlpha = (1 - dist / maxDist) * (isDark ? 0.30 : 0.22);
           ctx.beginPath();
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = 'rgba(64, 81, 181, ' + lineAlpha + ')';
+          ctx.strokeStyle = strokeBase + lineAlpha + ')';
           ctx.lineWidth = 0.65;
           ctx.stroke();
         }
@@ -148,11 +172,13 @@
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
+    const isDark = document.documentElement.classList.contains('dark-mode');
+
     for (let i = 0; i < particles.length; i++) {
       particles[i].update();
-      particles[i].draw();
+      particles[i].draw(isDark);
     }
-    drawConnections();
+    drawConnections(isDark);
 
     requestAnimationFrame(animate);
   }
@@ -160,4 +186,3 @@
   resize();
   animate();
 })();
-

@@ -1,0 +1,65 @@
+---
+---
+
+/* ==========================================================================
+   Stylized Background Drone Styles
+   ========================================================================== */
+
+.drone-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 78px;
+  height: 78px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  color: #4051b5;
+  transform: translate3d(-200px, -200px, 0);
+  will-change: transform, opacity;
+  transition: opacity 0.5s ease;
+}
+
+.dark-mode .drone-container {
+  color: #818cf8;
+}
+
+.drone-graphic {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px rgba(64, 81, 181, 0.22));
+}
+
+.dark-mode .drone-graphic {
+  filter: drop-shadow(0 4px 14px rgba(129, 140, 248, 0.35));
+}
+
+/* High-speed Rotor Propeller Spin */
+.drone-rotor {
+  animation: rotorSpin 0.16s linear infinite;
+}
+
+@keyframes rotorSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Status Beacon LED Pulse */
+.drone-beacon {
+  animation: beaconPulse 0.9s ease-in-out infinite;
+}
+
+@keyframes beaconPulse {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
