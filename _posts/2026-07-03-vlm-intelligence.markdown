@@ -5,7 +5,7 @@ author: "Giacomo Vianello"
 authors: <strong>G Vianello</strong>, D Cabello, R Carli, E Montijano
 categories: Research
 image: /images/master.png
-venue: Master Thesis, 2026
+venue: Master Thesis
 code: https://github.com/GiacomoVianello-1/vlm_onboad_drones
 paper: https://hdl.handle.net/20.500.12608/112965
 video: https://drive.google.com/drive/u/2/folders/1g34bRwlk_EBqyK5RCCJ6xelpvZe826Tv
