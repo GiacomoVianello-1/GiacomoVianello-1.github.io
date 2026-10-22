@@ -6,7 +6,7 @@ categories: Research
 image: /images/rl_snake.gif
 code: https://github.com/GiacomoVianello-1/RL-Snake
 paper: /pdfs/DRL_Snake_Project.pdf
-venue: Course Project - Reinforcement Learning
-abstract: "An implementation of various Deep Reinforcement Learning agents (A2C, PPO, and DDQN) to solve the classic Snake game. The project explores agent performance in both fully and partially observable environments, analyzing how different architectures and reward functions impact the learning stability and final score."
+venue: Reinforcement Learning - University of Padova
+abstract: "A comparative study of Deep Reinforcement Learning algorithms applied to the classic Snake game across fully and partially observable environments. Implemented in PyTorch with vectorized parallel rollouts, the benchmark evaluates Double DQN (DDQN), Advantage Actor-Critic (A2C), and Proximal Policy Optimization (PPO) against a heuristic baseline. Through shaped reward formulations and action masking, PPO demonstrates superior sample efficiency, training stability, and survival time, outperforming value-based approaches in complex state regimes."
 ---
-In this project, I developed a custom environment for the Snake game to test different **Deep Reinforcement Learning** algorithms. I compared policy-gradient methods like **PPO** and **A2C** against value-based methods like **Double DQN**. A significant part of the work involved designing the state representation for partially observable scenarios, where the agent only sees a limited 3x3 or 5x5 grid around its head.
+Benchmarking PPO, A2C, and Double DQN in PyTorch for the Snake game under fully and partially observable grid representations.

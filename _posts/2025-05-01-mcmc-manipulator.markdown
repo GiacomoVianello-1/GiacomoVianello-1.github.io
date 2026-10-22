@@ -8,6 +8,6 @@ image: /images/mcmc_robot.jpg
 code: https://github.com/GiacomoVianello-1/MCMC_2R_manipulator
 paper: /pdfs/Estimation_paper.pdf
 venue: Estimation and Filtering - University of Padua
-abstract: "Application of Markov Chain Monte Carlo (MCMC) methods to estimate the dynamic parameters of a 2-DOF planar manipulator. The project uses a Bayesian approach to infer link masses and lengths from noisy joint torque and trajectory data, comparing different sampling strategies and prior distributions."
+abstract: "A Bayesian identification framework using Markov Chain Monte Carlo (MCMC) to estimate joint friction parameters in a 2-DOF planar manipulator. Using simulated joint trajectories and noisy torque measurements, a Metropolis-Hastings sampling scheme infers the posterior distributions of linear viscous and nonlinear Coulomb friction coefficients. The method provides full uncertainty quantification, demonstrating robust parameter recovery and rapid Markov chain convergence even under substantial measurement noise."
 ---
-This project implements a Bayesian framework using Markov Chain Monte Carlo (MCMC) to estimate the friction parameters of a 2-degree-of-freedom (2R) planar robotic manipulator. By employing the Metropolis-Hastings algorithm, the system identifies both linear and nonlinear friction components from noisy torque and velocity data.
+Bayesian parameter estimation of joint friction in a 2-DOF manipulator using Metropolis-Hastings MCMC under noisy torque and velocity data.

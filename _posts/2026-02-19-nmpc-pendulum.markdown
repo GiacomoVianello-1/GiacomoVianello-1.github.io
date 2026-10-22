@@ -7,7 +7,7 @@ categories: Research
 image: /images/pendulum.gif
 code: https://github.com/GiacomoVianello-1/NMPC-Inverted-Pendulum-Acados
 poster: /pdfs/NMPC_Inverted_Pendulum.pdf
-venue: Course Project - Adaptive and Model Predictive Control
-abstract: "Implementation of a Non-linear Model Predictive Control (NMPC) strategy to stabilize an inverted pendulum on a cart. The project leverages the acados solver for high-performance numerical optimization and CasADi for algorithmic differentiation, focusing on real-time feasibility and state/input constraints."
+venue: Adaptive and Model Predictive Control - University of Padova
+abstract: "A real-time Nonlinear Model Predictive Control (NMPC) formulation for the swing-up and stabilization of an inverted pendulum on a cart, implemented using acados and CasADi. The controller utilizes the Real-Time Iteration (RTI) scheme to solve constrained nonlinear optimal control problems at high frequencies. An extended state formulation penalizes control jerk for smooth actuator transitions, while robustness analyses under parameter mismatches and horizon variations highlight NMPC's superiority over standard linear MPC."
 ---
-This project explores the use of **acados** to solve real-time optimal control problems. I modeled the nonlinear dynamics of the inverted pendulum and designed an NMPC controller capable of managing actuator constraints, ensuring system stability even in the presence of disturbances.
+Real-time NMPC for inverted pendulum swing-up and stabilization using acados and CasADi, with jerk penalty and robustness analysis.

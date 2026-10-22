@@ -6,7 +6,6 @@ categories: Research
 image: /images/ros2_vlm.jpg
 code: https://github.com/GiacomoVianello-1/ros2_vlms/tree/ros2-vlms-updated
 venue: Free-time Project
-abstract: "Development of a ROS2 framework to integrate Vision-Language Models (VLMs) for aerial robotics. The project enables real-time scene understanding and captioning using both local models (like BLIP and SmolVLM) and cloud-based APIs (Gemini), providing a modular pipeline for high-level robot perception."
+abstract: "A modular ROS2 framework designed to integrate compact Vision-Language Models (VLMs) into robotic perception pipelines. Supporting both onboard edge models (such as SmolVLM and BLIP) and cloud-based multimodal APIs (Gemini), the architecture provides real-time Visual Question Answering (VQA), scene captioning, and semantic querying to enable natural-language grounding for autonomous robotic systems."
 ---
-
-A robotic-oriented infrastructure that introduces ROS2 nodes for acquiring images and perform local VQA through small-size VLMs. This serves as the natural-language abstraction layer for a human-robot application.
+Modular ROS2 pipeline integrating local edge VLMs and cloud vision APIs for real-time robotic scene understanding and VQA.
